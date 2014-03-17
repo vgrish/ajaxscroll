@@ -41,9 +41,9 @@ $(document).on('as_complete', document, function(e,d) {
 
     pageY = (window.pageYOffset || document.documentElement.scrollTop)+10;
     
-    itemHeight = $('.ajax-snippet#'+dkey).outerHeight();
+    //itemHeight = $('.ajax-snippet#'+dkey).outerHeight();
 
-    if (((pageY >= itemHeight) || (pageY >= paginTop) ) && (url!== urlpre) && (url)) {
+    if ((pageY >= paginTop)  && (url!== urlpre) && (url)) {
         
        pagenum = url.substring(url.lastIndexOf("=")+1, url.leght ) ;
            
