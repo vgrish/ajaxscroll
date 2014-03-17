@@ -20,8 +20,7 @@ $(document).on('as_complete', document, function(e,d) {
     $(document).on('click', '.'+dkey+' .pagination a', function(e) {
     e.preventDefault();
     url = $(this).attr('href');
-    pagenum = url.substring(url.indexOf("=")+1, url.leght ) ;
-
+    pagenum = url.substring(url.lastIndexOf("=")+1, url.leght ) ;
     $.post(url, {as_action: dkey}, function(response) {
         if (typeof response.output !== "undefined") {
             $('.ajax-snippet#'+dkey).append(response.output);
@@ -42,10 +41,9 @@ $(document).on('as_complete', document, function(e,d) {
 
     var pageY = window.pageYOffset || document.documentElement.scrollTop;
 
-    if ((pageY >= paginTop) && (url!== urlpre)) {
-       
-       pagenum = url.substring(url.indexOf("=")+1, url.leght ) ;
-
+    if ((pageY >= paginTop) && (url!== urlpre) && (url)) {
+       pagenum = url.substring(url.lastIndexOf("=")+1, url.leght ) ;
+           
        $.post(url, {as_action: dkey}, function(response) {
         if (typeof response.output !== "undefined") {
             $('.ajax-snippet#'+dkey).append(response.output);
