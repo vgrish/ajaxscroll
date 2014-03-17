@@ -1,34 +1,20 @@
 function getCoords(elem) {
-    var box = elem.getBoundingClientRect();
-
-    var body = document.body;
-    var docElem = document.documentElement;
-
-    var scrollTop = window.pageYOffset || docElem.scrollTop || body.scrollTop;
-
-    var clientTop = docElem.clientTop || body.clientTop || 0;
-
-    var top  = box.top +  scrollTop - clientTop;
-
-    return { top: Math.round(top)};
+    var topY = $(elem).offset().top;
+    return Math.round(topY);
 }
 
 function visible(elem) {
-    
     if ("#"+elem) {
     paginElem = document.getElementById(elem);
-    paginTop = getCoords(paginElem).top;
+    paginTop = getCoords(paginElem);
     poz[pagenum]=paginTop;
     }
-
 }
-////////////////////////
-var dkey,paginElem,paginTop,pagenum=1,url,urlpre=1,pagination="page", poz=[];
 
+var dkey,paginElem,paginTop,pagenum=1,url,urlpre=1,pagination="page", poz=[];
 
 $(document).on('as_complete', document, function(e,d) {
     dkey = d["key"];
-    
     $(".pagin."+dkey).append(d["pagination"]);
 
     $(document).on('click', '.'+dkey+' .pagination a', function(e) {
@@ -64,36 +50,26 @@ $(document).on('as_complete', document, function(e,d) {
         if (typeof response.output !== "undefined") {
             $('.ajax-snippet#'+dkey).append(response.output);
             $(".pagin."+dkey).html(response.pagination); 
-            
             Hash.add(pagination, pagenum);
           }
         }, "json");                  
        
        urlpre=url; 
        visible("pagin");
-       
+   
     }
     /////////
     if (poz[pagenum-1] > pageY ) {
-       
        if ((pagenum-1) >0) {
-       
        pagenum--;
-
        Hash.add(pagination, pagenum);
-       
        }
     }
     if (poz[pagenum] < pageY ) {
-       
        if ((pagenum) >0) {
-       
        pagenum++;
-       
        Hash.add(pagination, pagenum);
-       
        }
-
     }
     //////////
     
