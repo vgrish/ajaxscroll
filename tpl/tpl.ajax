@@ -1,0 +1,5 @@
+
+<div id="[[+key]]" class="ajax-snippet">
+	<img src=" " class="as_spinner" style="width:32px;margin:auto;display:block;">
+</div>
+<div class="pagin [[+key]]" id="pagin" ></div>
