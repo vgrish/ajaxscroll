@@ -11,7 +11,7 @@ function visible(elem) {
     }
 }
 
-var dkey,paginElem,paginTop,pagenum=1,url,urlpre=1,pagination="page", poz=[];
+var dkey,paginElem,paginTop,pagenum=1,url,urlpre=1,pagination="page", poz=[],itemHeight,pageY;
 
 $(document).on('as_complete', document, function(e,d) {
     dkey = d["key"];
@@ -29,7 +29,7 @@ $(document).on('as_complete', document, function(e,d) {
     }, "json");                  
     urlpre=url;     
     visible("pagin");
-
+    
     }); 
 
 });
@@ -39,9 +39,12 @@ $(document).on('as_complete', document, function(e,d) {
     window.onscroll = function() {
     url = $("#next").attr('href');
 
-    var pageY = window.pageYOffset || document.documentElement.scrollTop;
+    pageY = (window.pageYOffset || document.documentElement.scrollTop)+10;
+    
+    itemHeight = $('.ajax-snippet#'+dkey).outerHeight();
 
-    if ((pageY >= paginTop) && (url!== urlpre) && (url)) {
+    if (((pageY >= itemHeight) || (pageY >= paginTop) ) && (url!== urlpre) && (url)) {
+        
        pagenum = url.substring(url.lastIndexOf("=")+1, url.leght ) ;
            
        $.post(url, {as_action: dkey}, function(response) {
