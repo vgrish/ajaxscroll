@@ -1,5 +1,6 @@
 function getCoords(elem) {
     var topY = $(elem).offset().top;
+    console.log("topY-"+topY);
     return Math.round(topY);
 }
 
@@ -34,13 +35,12 @@ $(document).on('as_complete', document, function(e,d) {
 
 });
 //////////////////////////////////////////////////
-
+$(document).ready(function(){
     visible("pagin");
     window.onscroll = function() {
-    url = $("#next").attr('href');
-
-    pageY = (window.pageYOffset || document.documentElement.scrollTop)+10;
     
+    url = $("#next").attr('href');
+    pageY = (window.pageYOffset || document.documentElement.scrollTop)+10;
     //itemHeight = $('.ajax-snippet#'+dkey).outerHeight();
 
     if ((pageY >= paginTop)  && (url!== urlpre) && (url)) {
@@ -75,3 +75,4 @@ $(document).on('as_complete', document, function(e,d) {
     //////////
     
   }
+});
